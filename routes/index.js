@@ -34,4 +34,34 @@ module.exports = route = (app) =>{
             res.send({status: false, data: err});
         }
     });
+
+    app.get('/api/getCms/:slug', async (req, res) => {
+        try{
+            const result = await controller.getCmsPage(req.params.slug);
+            res.send({status: true, data: result});
+        }catch (err){
+            console.error("Error:", err);
+            res.send({status: false, data: err});
+        }
+    });
+
+    app.post('/api/newsletter', async (req, res) => {
+        try{
+            const result = await controller.saveNewsLetter(req.body);
+            res.send({status: true, data: result, message: 'Saved'});
+        }catch (err){
+            console.error("Error:", err);
+            res.send({status: false, data: err});
+        }
+    });
+
+    app.post('/api/enquiry', async (req, res) => {
+        try{
+            const result = await controller.saveEnquiry(req.body);
+            res.send({status: true, data: result, message: 'Saved'});
+        }catch (err){
+            console.error("Error:", err);
+            res.send({status: false, data: err});
+        }
+    });
 }

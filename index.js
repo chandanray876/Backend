@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const connect = require('./databaseConnection/index');
 const route = require('./routes/index');
 require('dotenv').config();
 
 app.use(cors());
+
+// Use body-parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
